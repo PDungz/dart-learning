@@ -27,7 +27,7 @@ void main(List<String> args) {
           findMaxMin();
           break;
         case 4:
-          handleDivision();
+          print("Kết quả của a / b = ${handleDivision()}");
           break;
         case 5:
           executeStrLoop();
@@ -104,7 +104,7 @@ void findMaxMin() {
 }
 
 //! Bài tập 4: Xử lý ngoại lệ khi chia hai số
-void handleDivision() {
+double? handleDivision() {
   try {
     print("Nhập số a: ");
     int a = int.parse(stdin.readLineSync()!);
@@ -114,10 +114,10 @@ void handleDivision() {
     if (b == 0) {
       throw Exception("Mẫu số b phải khác 0!");
     }
-
-    print("Kết quả của a / b = ${a / b}");
+    return a / b;
   } catch (e) {
     print("Lỗi: $e");
+    return null;
   }
 }
 
