@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 //! Enum
 //! 1. Khi nào sử dụng Enum?
 // Bạn có thể sử dụng enum khi bạn muốn làm việc với một nhóm các giá trị cố định
@@ -107,7 +108,7 @@
 //! Bài tập: Quản lý trạng thái đặt hàng
 //? Yêu cầu:
 
-//? 1. Tạo một enum có tên là OrderStatus để đại diện cho các trạng thái của một đơn hàng, 
+//? 1. Tạo một enum có tên là OrderStatus để đại diện cho các trạng thái của một đơn hàng,
 // bao gồm:
 //  - pending (đang chờ xử lý)
 //  - processed (đã xử lý)
@@ -118,10 +119,10 @@
 // - id (số ID của đơn hàng)
 // - status (trạng thái của đơn hàng, sử dụng OrderStatus)
 //? 3. Tạo phương thức updateStatus trong lớp Order để cập nhật trạng thái của đơn hàng.
-//? 4. Trong phương thức main(), tạo một đối tượng Order, 
-//  hiển thị trạng thái ban đầu của đơn hàng, 
-//  sau đó cập nhật trạng thái của đơn hàng 
-//  qua các bước processed, shipped, và delivered. 
+//? 4. Trong phương thức main(), tạo một đối tượng Order,
+//  hiển thị trạng thái ban đầu của đơn hàng,
+//  sau đó cập nhật trạng thái của đơn hàng
+//  qua các bước processed, shipped, và delivered.
 //  Cuối cùng, hiển thị trạng thái cuối cùng của đơn hàng.
 //? Khi bạn chạy chương trình, kết quả sẽ trông giống như sau
 // Initial status of Order 1: OrderStatus.pending
@@ -129,3 +130,68 @@
 // Order 1 status updated to OrderStatus.shipped
 // Order 1 status updated to OrderStatus.delivered
 // Final status of Order 1: OrderStatus.delivered
+
+// enum OrderStatus { pending, processed, shipped, delivered, cancelled }
+
+// class Order {
+//   final int _id;
+//   OrderStatus _status;
+//   Order(
+//     this._id,
+//     this._status,
+//   );
+
+//   void updateStatus(OrderStatus status) {
+//     _status = status;
+//   }
+// }
+
+// void main(List<String> args) {
+//   final item = Order(1, OrderStatus.pending);
+
+//   print("Initial status of Order 1: ${item._status}");
+
+//   item.updateStatus(OrderStatus.processed);
+//   print("1 status updated to ${item._status}");
+
+//   item.updateStatus(OrderStatus.shipped);
+//   print("1 status updated to ${item._status}");
+
+//   item.updateStatus(OrderStatus.delivered);
+//   print("1 status updated to ${item._status}");
+
+//   item.updateStatus(OrderStatus.delivered);
+//   print("Final status of Order 1: ${item._status}");
+// }
+
+// Bước 1: Tạo enum OrderStatus để đại diện cho các trạng thái của đơn hàng
+enum OrderStatus { pending, processed, shipped, delivered, cancelled }
+
+// Bước 2: Tạo lớp Order biểu diễn đơn hàng
+class Order {
+  int id;
+  OrderStatus status;
+
+  // Constructor
+  Order(this.id, this.status);
+
+  // Bước 3: Phương thức cập nhật trạng thái của đơn hàng
+  void updateStatus(OrderStatus newStatus) {
+    status = newStatus;
+    print('Order $id status updated to $status');
+  }
+}
+
+void main() {
+  // Bước 4: Tạo đối tượng Order và hiển thị trạng thái ban đầu
+  Order order = Order(1, OrderStatus.pending);
+  print('Initial status of Order ${order.id}: ${order.status}');
+
+  // Cập nhật trạng thái của đơn hàng qua các bước
+  order.updateStatus(OrderStatus.processed);
+  order.updateStatus(OrderStatus.shipped);
+  order.updateStatus(OrderStatus.delivered);
+
+  // Hiển thị trạng thái cuối cùng
+  print('Final status of Order ${order.id}: ${order.status}');
+}
