@@ -12,19 +12,21 @@
 // theo sau là tên của extension và từ khóa on,
 // rồi đến kiểu dữ liệu mà bạn muốn mở rộng.
 
-void main() {
-  String example = "Dart";
+import 'dart:ffi';
 
-  // Sử dụng phương thức mới reversed
+// void main() {
+//   String example = "Dart";
 
-  print(example.reversed); // In ra: traD
+//   // Sử dụng phương thức mới reversed
 
-  // Sử dụng phương thức mới isNumeric
-  print(example.isNumeric); // In ra: false
+//   print(example.reversed); // In ra: traD
 
-  String number = "12345";
-  print(number.isNumeric); // In ra: true
-}
+//   // Sử dụng phương thức mới isNumeric
+//   print(example.isNumeric); // In ra: false
+
+//   String number = "12345";
+//   print(number.isNumeric); // In ra: true
+// }
 
 extension StringExtensions on String {
   // Thêm một phương thức để kiểm tra chuỗi có phải là một số hay không
@@ -38,8 +40,8 @@ extension StringExtensions on String {
   }
 }
 
-//! Bài tập 
-//  - 1 extension cho phép chuyển 1 con số đại diện cho nhiệt độ 
+//! Bài tập
+//  - 1 extension cho phép chuyển 1 con số đại diện cho nhiệt độ
 //    nhiệt độ này có thể đổi từ độ C sang độ F và ngược lại
 
 //  - 1 extension để thêm ký tự °C hoặc °F vào đuôi
@@ -47,3 +49,24 @@ extension StringExtensions on String {
 //? Công thức tính:
 // C = (5/9)*(F - 32)
 // F = (9/5)*C + 32
+
+// Extension to convert temperature
+extension TemperatureConversion on num {
+  num toCelsius() => (5 / 9) * (this - 32);
+  num toFahrenheit() => (9 / 5) * this + 32;
+}
+
+// Extension to append the temperature symbol
+extension TemperatureSymbol on num {
+  String celsiusSymbol() => '${toStringAsFixed(2)}°C';
+  String fahrenheitSymbol() => '${toStringAsFixed(2)}°F';
+}
+
+void main() {
+  // Example usage:
+  num tempF = 98.6;
+  num tempC = 37;
+
+  print(tempF.toCelsius().celsiusSymbol()); // 37.0°C
+  print(tempC.toFahrenheit().fahrenheitSymbol()); // 98.6°F
+}
