@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 //! Generic
 // Trong nhiều trường hợp, bạn muốn viết một lớp hoặc một hàm mà có thể làm việc với nhiều loại dữ liệu khác nhau,
 // nhưng vẫn giữ được tính an toàn kiểu dữ liệu.
@@ -137,3 +138,109 @@
   - Thêm và xóa các món hàng khỏi bộ sưu tập.
   - Tính và hiển thị tổng giá trị của các món hàng trong mỗi bộ sưu tập.
 */
+
+class Book {
+  String title;
+  String author;
+  double price;
+  Book(
+    this.title,
+    this.author,
+    this.price,
+  );
+}
+
+class Phone {
+  String branh;
+  String model;
+  double price;
+  Phone(
+    this.branh,
+    this.model,
+    this.price,
+  );
+}
+
+class Food {
+  String name;
+  DateTime expirationDate;
+  double price;
+  Food(
+    this.name,
+    this.expirationDate,
+    this.price,
+  );
+}
+
+class ItemCollection<T> {
+  List<T> items = [];
+  // ItemCollection(
+  //   this.items,
+  // );
+
+  void addItem(T item) {
+    items.add(item);
+    print('Added: $item');
+  }
+
+  void removeItem(T item) {
+    items.remove(item);
+    print("Removed: $item");
+  }
+
+  List<T> getItem() => items;
+
+  double calculateTotalPrice() {
+    double total = 0;
+    for (var item in items) {
+      if (item is Book) {
+        total += item.price;
+      } else if (item is Phone) {
+        total += item.price;
+      } else if (item is Food) {
+        total += item.price;
+      }
+    }
+    return total;
+  }
+}
+
+void main() {
+  // Tạo đối tượng Book
+  Book book1 = Book('Dart Programming', 'Author A', 29.99);
+  Book book2 = Book('Flutter Development', 'Author B', 39.99);
+
+  // Tạo đối tượng Phone
+  Phone phone1 = Phone('Apple', 'iPhone 13', 999.99);
+  Phone phone2 = Phone('Samsung', 'Galaxy S21', 799.99);
+
+  // Tạo đối tượng Food
+  Food food1 = Food('Apple', DateTime(2024, 9, 10), 1.99);
+  Food food2 = Food('Bread', DateTime(2024, 9, 5), 2.49);
+
+  // Tạo bộ sưu tập Book
+  ItemCollection<Book> bookCollection = ItemCollection<Book>();
+  bookCollection.addItem(book1);
+  bookCollection.addItem(book2);
+  print(
+      'Total price of books: \$${bookCollection.calculateTotalPrice().toStringAsFixed(2)}\n');
+
+  // Tạo bộ sưu tập Phone
+  ItemCollection<Phone> phoneCollection = ItemCollection<Phone>();
+  phoneCollection.addItem(phone1);
+  phoneCollection.addItem(phone2);
+  print(
+      'Total price of phones: \$${phoneCollection.calculateTotalPrice().toStringAsFixed(2)}\n');
+
+  // Tạo bộ sưu tập Food
+  ItemCollection<Food> foodCollection = ItemCollection<Food>();
+  foodCollection.addItem(food1);
+  foodCollection.addItem(food2);
+  print(
+      'Total price of foods: \$${foodCollection.calculateTotalPrice().toStringAsFixed(2)}\n');
+
+  // Xóa món hàng khỏi bộ sưu tập
+  bookCollection.removeItem(book1);
+  print(
+      'Total price of books after removal: \$${bookCollection.calculateTotalPrice().toStringAsFixed(2)}');
+}
