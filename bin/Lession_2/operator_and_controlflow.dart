@@ -106,13 +106,13 @@ void main(List<String> args) {
   //   print("take a break");
   // }
   print(n && o); // AND logic, in ra false
-  print(n || o); // OR logic, in ra true
+  // print(n || o); // OR logic, in ra true
 
   //! If null (Toán tử kiểm tra null)
   // Toán tử kiểm tra null (??) được sử dụng để trả về giá trị bên phải nếu giá trị bên trái là null.
   String? p;
   p = "hello";
-  String q = p ?? "Default value";
+  // String q = p ?? "Default value";
   print("q value is: $p");
 
   // //! Conditional (Toán tử ba ngôi - ternary operator)
