@@ -12,8 +12,6 @@
 // theo sau là tên của extension và từ khóa on,
 // rồi đến kiểu dữ liệu mà bạn muốn mở rộng.
 
-import 'dart:ffi';
-
 // void main() {
 //   String example = "Dart";
 
